@@ -1,5 +1,5 @@
 # GBA rom header
-TITLE       := POKEMON EMER
+TITLE       := POKEMON BRYL
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
@@ -7,8 +7,9 @@ MODERN      ?= 0
 KEEP_TEMPS  ?= 0
 
 # `File name`.gba ('_modern' will be appended to the modern builds)
-FILE_NAME := pokeemerald
+FILE_NAME := pokeberyl
 BUILD_DIR := build
+EXTENSION_DIR := extensions
 
 # Builds the ROM using a modern compiler
 MODERN      ?= 0
@@ -390,6 +391,7 @@ $(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS) libagbsyscall
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
+	$(EXTENSION_DIR)/GenerateREADME.sh
 
 # Symbol file (`make syms`)
 $(SYM): $(ELF)
