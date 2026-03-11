@@ -1257,7 +1257,9 @@ EventScript_CloseMossdeepGameCornerBarrier::
 	return
 
 CableClub_OnResume:
+#ifndef QOL_DISABLE_UNION_ROOM_CHECK
 	special InitUnionRoom
+#endif
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_InfoMan2::

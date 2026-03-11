@@ -1813,10 +1813,15 @@ static bool8 Fishing_ShowDots(struct Task *task)
     task->tFrameCounter++;
     if (JOY_NEW(A_BUTTON))
     {
+    #ifndef QOL_EASY_FISHING
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
             task->tStep = FISHING_GOT_AWAY;
         return TRUE;
+    #else
+        task->tStep = FISHING_GOT_BITE;
+        return FALSE;
+    #endif
     }
     else
     {
@@ -1825,7 +1830,11 @@ static bool8 Fishing_ShowDots(struct Task *task)
             task->tFrameCounter = 0;
             if (task->tNumDots >= task->tDotsRequired)
             {
+            #ifndef QOL_EASY_FISHING
                 task->tStep++;
+            #else
+                task->tStep = FISHING_GOT_BITE;
+            #endif
                 if (task->tRoundsPlayed != 0)
                     task->tStep++;
                 task->tRoundsPlayed++;
@@ -1898,9 +1907,13 @@ static bool8 Fishing_WaitForA(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tFrameCounter++;
+#ifndef QOL_EASY_FISHING
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
     else if (JOY_NEW(A_BUTTON))
+#else
+    if (JOY_NEW(A_BUTTON))
+#endif
         task->tStep++;
     return FALSE;
 }
@@ -1917,6 +1930,7 @@ static bool8 Fishing_CheckMoreDots(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tStep++;
+#ifndef QOL_EASY_FISHING
     if (task->tRoundsPlayed < task->tMinRoundsRequired)
     {
         task->tStep = FISHING_START_ROUND;
@@ -1929,6 +1943,7 @@ static bool8 Fishing_CheckMoreDots(struct Task *task)
         if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
             task->tStep = FISHING_START_ROUND;
     }
+#endif
     return FALSE;
 }
 
