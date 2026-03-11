@@ -62,9 +62,10 @@
 #define QOL_NO_EXTRA_SAVE_CONFIRM    //< Remove extra confirmation for saving game
 #define QOL_DISABLE_UNION_ROOM_CHECK //< Disable Nurse Joy checking the union room
 #define QOL_EASY_FISHING             //< Fishing never fails and always hooks a Pokemon
+#define QOL_RENAME_TRADED_POKEMON    //< Can rename all Pokemon, even if received in trade
 
 // Choose only one of the VSYNC_ options
-#define VSYNC_COMPATIBILITY //< Optimize Vsync while maintaining linking
+#define VSYNC_COMPATIBILITY //< Optimize Vsync while maintaining linking compatibility
 //#define VSYNC_AGGRESSIVE  //< Optimize Vsync aggressively, breaking vanilla compatibility
 
 #endif // GUARD_CONFIG_H
