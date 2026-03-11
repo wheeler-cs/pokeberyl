@@ -17,7 +17,7 @@
 #include "trig.h"
 #include "gpu_regs.h"
 
-#ifdef WEATHER_FIX_SNOW
+#ifdef FIX_WEATHER_SNOW
 #include "field_camera.h"
 #endif
 
@@ -223,7 +223,7 @@ static void Task_WeatherInit(u8 taskId)
     // When the screen fades in, this is set to TRUE.
     if (gWeatherPtr->readyForInit)
     {
-    #ifdef WEATHER_FIX_SNOW
+    #ifdef FIX_WEATHER_SNOW
         UpdateCameraPanning();
     #endif
         sWeatherFuncs[gWeatherPtr->currWeather].initAll();

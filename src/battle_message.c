@@ -1159,7 +1159,7 @@ const u16 gWeatherStartsStringIds[] =
     [WEATHER_SUNNY_CLOUDS]       = STRINGID_ITISRAINING,
     [WEATHER_SUNNY]              = STRINGID_ITISRAINING,
     [WEATHER_RAIN]               = STRINGID_ITISRAINING,
-#ifndef WEATHER_FIX_SNOW
+#ifndef FIX_WEATHER_SNOW
     [WEATHER_SNOW]               = STRINGID_ITISRAINING,
 #else
     [WEATHER_SNOW]               = STRINGID_STARTEDHAIL,

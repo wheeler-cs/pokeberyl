@@ -56,6 +56,13 @@
 #endif
 
 // Comment out defines to disable features
-#define WEATHER_FIX_SNOW //< Fix overworld snow weather
+#define FIX_WEATHER_SNOW    //< Fix overworld snow weather
+#define FIX_REDUNDANT_POPUP //< Remove map popups if walking between same map area
+
+#define QOL_NO_EXTRA_SAVE_CONFIRM //< Remove extra confirmation for saving game
+
+// Choose only one of the VSYNC_ options
+#define VSYNC_COMPATIBILITY //< Optimize Vsync while maintaining linking
+//#define VSYNC_AGGRESSIVE  //< Optimize Vsync aggressively, breaking vanilla compatibility
 
 #endif // GUARD_CONFIG_H

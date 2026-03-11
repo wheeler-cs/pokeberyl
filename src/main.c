@@ -410,9 +410,24 @@ static void IntrDummy(void)
 static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-
+#if defined(VSYNC_COMPATIBILITY)
+    // Use fast vsync in single player
+    if(!gWirelessCommType)
+    {
+        asm("swi 0x5");
+        return;
+    }
+    // Use regular vsync when connected
     while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
         ;
+#elif defined(VSYNC_AGGRESIVE)
+    // Use fast vsync all the time
+    asm("swi 0x5");
+#else
+    // Use regular vsync all the time
+    while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
+        ;
+#endif
 }
 
 void SetTrainerHillVBlankCounter(u32 *counter)
