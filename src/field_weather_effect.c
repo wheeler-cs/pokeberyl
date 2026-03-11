@@ -941,7 +941,11 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
 static void WaitSnowflakeSprite(struct Sprite *sprite)
 {
     // Timer is never incremented
+#ifndef WEATHER_FIX_SNOW
     if (gWeatherPtr->snowflakeTimer > 18)
+#else
+    if (++gWeatherPtr->snowflakeTimer > 18)
+#endif
     {
         sprite->invisible = FALSE;
         sprite->callback = UpdateSnowflakeSprite;
@@ -971,6 +975,7 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
     else if (x > 242)
         sprite->x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
 
+#ifndef WEATHER_FIX_SNOW
     y = (sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
     if (y > 163 && y < 171)
     {
@@ -996,6 +1001,7 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
         sprite->invisible = TRUE;
         sprite->callback = WaitSnowflakeSprite;
     }
+#endif
 }
 
 #undef tPosY

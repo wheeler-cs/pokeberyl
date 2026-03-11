@@ -17,6 +17,10 @@
 #include "trig.h"
 #include "gpu_regs.h"
 
+#ifdef WEATHER_FIX_SNOW
+#include "field_camera.h"
+#endif
+
 #define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
 enum
@@ -219,6 +223,9 @@ static void Task_WeatherInit(u8 taskId)
     // When the screen fades in, this is set to TRUE.
     if (gWeatherPtr->readyForInit)
     {
+    #ifdef WEATHER_FIX_SNOW
+        UpdateCameraPanning();
+    #endif
         sWeatherFuncs[gWeatherPtr->currWeather].initAll();
         gTasks[taskId].func = Task_WeatherMain;
     }
