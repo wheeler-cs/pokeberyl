@@ -23,6 +23,11 @@ echo "# Installation" >> README.md
 echo "Installation instructions can be found in [INSTALL.md](./INSTALL.md)." >> README.md
 echo "" >> README.md
 
+# Write changes info
+echo "# Changes" >> README.md
+echo "Changes introduced to the game can be found in [config.h](include/config.h). If you also want to enable or disable features before compiling, this is where you can configure the game to do so." >> README.md
+echo "" >> README.md
+
 # Write legal info
 echo "# Legal" >> README.md
 echo "This project is not affiliated with or endorsed by Nintendo, Creatures Inc., or any other party connected to the Pokémon franchise." >> README.md

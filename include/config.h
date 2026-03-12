@@ -55,6 +55,16 @@
 #endif
 #endif
 
+/**
+ * Code below this point is code that is introduced by the Pokemon Beryl ROM hack. Features can be
+ * disabled by commenting out the define. This will remove all the code related to that feature
+ * from the output ROM.
+ * 
+ * Some options are an either-or case, where you can pick to enable one or the other (e.g.
+ * VSYNC_COMPATIBILITY and VSYNC_AGGRESSIVE). Options that follow this style are indicated as such
+ * with comments.
+ */
+
 // Comment out defines to disable features
 #define FIX_WEATHER_SNOW    //< Fix overworld snow weather
 #define FIX_REDUNDANT_POPUP //< Remove map popups if walking between same map area
