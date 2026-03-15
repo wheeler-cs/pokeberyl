@@ -41,8 +41,10 @@ struct Weather
             struct Sprite *sandstormSprites2[NUM_SWIRL_SANDSTORM_SPRITES];
         } s2;
     } sprites;
+#ifndef FIX_REDUNDANT_COLOR_MAP
     u8 darkenedContrastColorMaps[NUM_WEATHER_COLOR_MAPS][32];
     u8 contrastColorMaps[NUM_WEATHER_COLOR_MAPS][32];
+#endif
     s8 colorMapIndex;
     s8 targetColorMapIndex;
     u8 colorMapStepDelay;

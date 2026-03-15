@@ -66,8 +66,9 @@
  */
 
 // Comment out defines to disable features
-#define FIX_WEATHER_SNOW    //< Fix overworld snow weather
-#define FIX_REDUNDANT_POPUP //< Remove map popups if walking between same map area
+#define FIX_WEATHER_SNOW        //< Fix overworld snow weather
+#define FIX_REDUNDANT_POPUP     //< Remove map popups if walking between same map area
+#define FIX_REDUNDANT_COLOR_MAP //< Remove expensive calls for rebuilding color maps
 
 #define QOL_BETTER_DEFAULT_OPTIONS   //< Set better default options for new saves
 #define QOL_NO_EXTRA_SAVE_CONFIRM    //< Remove extra confirmation for saving game
