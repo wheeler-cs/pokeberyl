@@ -69,6 +69,7 @@
 #define FIX_WEATHER_SNOW    //< Fix overworld snow weather
 #define FIX_REDUNDANT_POPUP //< Remove map popups if walking between same map area
 
+#define QOL_BETTER_DEFAULT_OPTIONS   //< Set better default options for new saves
 #define QOL_NO_EXTRA_SAVE_CONFIRM    //< Remove extra confirmation for saving game
 #define QOL_DISABLE_UNION_ROOM_CHECK //< Disable Nurse Joy checking the union room
 #define QOL_EASY_FISHING             //< Fishing never fails and always hooks a Pokemon
