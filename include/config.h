@@ -70,11 +70,12 @@
 #define FIX_REDUNDANT_POPUP     //< Remove map popups if walking between same map area
 #define FIX_REDUNDANT_COLOR_MAP //< Remove expensive calls for rebuilding color maps
 
-#define QOL_BETTER_DEFAULT_OPTIONS   //< Set better default options for new saves
-#define QOL_NO_EXTRA_SAVE_CONFIRM    //< Remove extra confirmation for saving game
-#define QOL_DISABLE_UNION_ROOM_CHECK //< Disable Nurse Joy checking the union room
-#define QOL_EASY_FISHING             //< Fishing never fails and always hooks a Pokemon
-#define QOL_RENAME_TRADED_POKEMON    //< Can rename all Pokemon, even if received in trade
+#define QOL_BETTER_DEFAULT_OPTIONS      //< Set better default options for new saves
+#define QOL_NO_EXTRA_SAVE_CONFIRM       //< Remove extra confirmation for saving game
+#define QOL_DISABLE_UNION_ROOM_CHECK    //< Disable Nurse Joy checking the union room
+#define QOL_EASY_FISHING                //< Fishing never fails and always hooks a Pokemon
+#define QOL_RENAME_TRADED_POKEMON       //< Can rename all Pokemon, even if received in trade
+#define QOL_FAST_RUN                    //< Pressing "B" in battle moves cursor to "RUN"
 
 #define FEATURE_PHYS_SPEC_SPLIT //< Enable the physical-special split from gen 4
 

@@ -322,6 +322,18 @@ static void HandleInputChooseAction(void)
             BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
+    #ifdef QOL_FAST_RUN
+        else
+        {
+            if(!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) //if wild, pressing B moves cursor to run
+            {
+                PlaySE(SE_SELECT);
+                ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+                gActionSelectionCursor[gActiveBattler] = 3;
+                ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            }
+        }
+    #endif
     }
     else if (JOY_NEW(START_BUTTON))
     {
