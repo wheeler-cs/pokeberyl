@@ -65,7 +65,11 @@ enum {
 #define PSS_LABEL_WINDOW_PROMPT_CANCEL 4
 #define PSS_LABEL_WINDOW_PROMPT_INFO 5
 #define PSS_LABEL_WINDOW_PROMPT_SWITCH 6
+#ifndef FEATURE_PHYS_SPEC_SPLIT
 #define PSS_LABEL_WINDOW_UNUSED1 7
+#else
+#define PSS_LABEL_WINDOW_CATEGORY 7
+#endif
 
 // Info screen
 #define PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL 8
@@ -312,6 +316,12 @@ static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
 
+#ifdef FEATURE_PHYS_SPEC_SPLIT
+static void DisplayCategory(u16);
+static const u16 sCategoryIcon_Pal[] = INCBIN_U16("graphics/summary_screen/split_icons_summary.gbapal");
+static const u8 sCategoryIcon_Gfx[] = INCBIN_U8("graphics/summary_screen/split_icons_summary.4bpp");
+#endif
+
 // const rom data
 #include "data/text/move_descriptions.h"
 #include "data/text/nature_names.h"
@@ -469,13 +479,13 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .paletteNum = 7,
         .baseBlock = 121,
     },
-    [PSS_LABEL_WINDOW_UNUSED1] = {
+    [PSS_LABEL_WINDOW_CATEGORY] = {
         .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 4,
-        .width = 0,
+        .tilemapLeft = 37,
+        .tilemapTop = 15,
+        .width = 2,
         .height = 2,
-        .paletteNum = 6,
+        .paletteNum = 10,
         .baseBlock = 137,
     },
     [PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL] = {
@@ -2466,8 +2476,16 @@ static void Task_SlidePowerAccWindow(u8 taskId)
     {
         if (tScrollingSpeed < 0)
         {
+        #ifndef FEATURE_PHYS_SPEC_SPLIT
             if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
                 PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+        #else
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
+            {
+                PutWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+                DisplayCategory(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]);
+            }
+        #endif
         }
         else
         {
@@ -3668,6 +3686,9 @@ static void PrintMoveDetails(u16 move)
         {
             PrintMovePowerAndAccuracy(move);
             PrintTextOnWindow(windowId, gMoveDescriptionPointers[move - 1], 6, 1, 0, 0);
+        #ifdef FEATURE_PHYS_SPEC_SPLIT
+            DisplayCategory(move);
+        #endif
         }
         else
         {
@@ -4181,3 +4202,13 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
         gSprites[spriteIds[i]].invisible = FALSE;
     }
 }
+
+#ifdef FEATURE_PHYS_SPEC_SPLIT
+static void DisplayCategory(u16 move)
+{
+    LoadPalette(sCategoryIcon_Pal, 10 * 0x10, 0x20);
+    BlitBitmapToWindow(PSS_LABEL_WINDOW_CATEGORY, sCategoryIcon_Gfx + 0x80 * gBattleMoves[move].category, 0, 0, 16, 16);
+    PutWindowTilemap(PSS_LABEL_WINDOW_CATEGORY);
+    CopyWindowToVram(PSS_LABEL_WINDOW_CATEGORY, 3);
+}
+#endif

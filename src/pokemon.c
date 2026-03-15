@@ -3167,6 +3167,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef))
         spDefense = (110 * spDefense) / 100;
 
+#ifndef FEATURE_PHYS_SPEC_SPLIT
     // Apply type-bonus hold item
     for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
     {
@@ -3180,6 +3181,18 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             break;
         }
     }
+#else
+    for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
+        {
+            if (attackerHoldEffect == sHoldEffectToType[i][0]
+                && type == sHoldEffectToType[i][1])
+            {
+                attack = (attack * (attackerHoldEffectParam + 100)) / 100;
+                spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
+                break;
+            }
+        }
+#endif
 
     // Apply boosts from hold items
     if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
@@ -3201,7 +3214,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
+    #ifndef FEATURE_PHYS_SPEC_SPLIT
         spAttack /= 2;
+    #else
+        gBattleMovePower /= 2;
+    #endif
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -3229,7 +3246,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
+#ifndef FEATURE_PHYS_SPEC_SPLIT
     if (IS_TYPE_PHYSICAL(type))
+#else
+    if (IS_MOVE_PHYSICAL(gCurrentMove))
+#endif
     {
         if (gCritMultiplier == 2)
         {
@@ -3284,7 +3305,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_MYSTERY)
         damage = 0; // is ??? type. does 0 damage.
 
+#ifndef FEATURE_PHYS_SPEC_SPLIT
     if (IS_TYPE_SPECIAL(type))
+#else
+    if (IS_MOVE_SPECIAL(gCurrentMove))
+#endif
     {
         if (gCritMultiplier == 2)
         {
@@ -3326,7 +3351,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Moves hitting both targets do half damage in double battles
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
-
+    #ifndef FEATURE_PHYS_SPEC_SPLIT
         // Are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
@@ -3366,7 +3391,47 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Flash fire triggered
         if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
+    #endif
     }
+
+#ifdef FEATURE_PHYS_SPEC_SPLIT
+    // Are effects of weather negated with cloud nine or air lock
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water
+        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage /= 2;
+                break;
+            case TYPE_WATER:
+                damage = (15 * damage) / 10;
+                break;
+            }
+        }
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage = (15 * damage) / 10;
+                break;
+            case TYPE_WATER:
+                damage /= 2;
+                break;
+            }
+        }
+    }
+    // Flash fire triggered
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        damage = (15 * damage) / 10;
+#endif
 
     return damage + 2;
 }
