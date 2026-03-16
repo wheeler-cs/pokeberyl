@@ -66,21 +66,25 @@
  */
 
 // Comment out defines to disable features
-#define FIX_WEATHER_SNOW        //< Fix overworld snow weather
-#define FIX_REDUNDANT_POPUP     //< Remove map popups if walking between same map area
-#define FIX_REDUNDANT_COLOR_MAP //< Remove expensive calls for rebuilding color maps
+#define FIX_WEATHER_SNOW                //< Fix overworld snow weather
+#define FIX_REDUNDANT_POPUP             //< Remove map popups if walking between same map area
+#define FIX_REDUNDANT_COLOR_MAP         //< Remove expensive calls for rebuilding color maps
+#define FIX_TMS_RESTORE_PP              //< TMs no longer restore PP when used
 
 #define QOL_BETTER_DEFAULT_OPTIONS      //< Set better default options for new saves
 #define QOL_NO_EXTRA_SAVE_CONFIRM       //< Remove extra confirmation for saving game
 #define QOL_DISABLE_UNION_ROOM_CHECK    //< Disable Nurse Joy checking the union room
 #define QOL_EASY_FISHING                //< Fishing never fails and always hooks a Pokemon
-#define QOL_RENAME_TRADED_POKEMON       //< Can rename all Pokemon, even if received in trade
+#define QOL_RENAME_TRADED_POKEMON       //< Able to rename all Pokemon, even if received in trade
 #define QOL_FAST_RUN                    //< Pressing "B" in battle moves cursor to "RUN"
+#define QOL_RUN_INDOORS                 //< Allows for running indoors
+#define QOL_CHANGE_CLOCK_TIME           //< Change the current time by pressing SELECT when viewing the clock
 
-#define FEATURE_PHYS_SPEC_SPLIT //< Enable the physical-special split from gen 4
+#define FEATURE_PHYS_SPEC_SPLIT         //< Enable the physical-special split from gen 4
+#define FEATURE_INFINITE_TMS            //< TMs are no longer consumed on use
 
 // Choose only one of the VSYNC_ options
-#define VSYNC_COMPATIBILITY //< Optimize Vsync while maintaining linking compatibility
-//#define VSYNC_AGGRESSIVE  //< Optimize Vsync aggressively, breaking vanilla compatibility
+#define VSYNC_COMPATIBILITY             //< Optimize Vsync while maintaining linking compatibility
+//#define VSYNC_AGGRESSIVE              //< Optimize Vsync aggressively, breaking vanilla compatibility
 
 #endif // GUARD_CONFIG_H

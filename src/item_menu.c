@@ -2067,7 +2067,11 @@ static void Task_ItemContext_Sell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
+#ifndef FEATURE_INFINITE_TMS
     if (GetItemPrice(gSpecialVar_ItemId) == 0)
+#else
+    if (GetItemPrice(gSpecialVar_ItemId) == 0 || GetItemPocket(gSpecialVar_ItemId) == POCKET_TM_HM)
+#endif
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
         StringExpandPlaceholders(gStringVar4, gText_CantBuyKeyItem);

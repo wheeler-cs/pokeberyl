@@ -334,7 +334,11 @@ Route104_EventScript_Boy2::
 	end
 
 Route104_EventScript_ReceivedBulletSeed::
+#ifdef FEATURE_INFINITE_TMS
+	msgbox Route104_Text_TMsCanBeReused, MSGBOX_DEFAULT
+#else
 	msgbox Route104_Text_TMsAreOneTimeUse, MSGBOX_DEFAULT
+#endif
 	release
 	end
 
@@ -1031,12 +1035,18 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "Use it on a POKéMON, and it will learn\n"
 	.string "a move for firing seeds rapidly.$"
 
+#ifdef FEATURE_INFINITE_TMS
+Route104_Text_TMsCanBeReused:
+	.string "By the way, a TM, TECHNICAL MACHINE,\n"
+	.string "can be used as many times as you want!$"
+#else
 Route104_Text_TMsAreOneTimeUse:
 	.string "A word of advice!\p"
 	.string "A TM, TECHNICAL MACHINE, is good only\n"
 	.string "for one-time use.\p"
 	.string "Once you use it, it's gone.\n"
 	.string "Think twice before using it!$"
+#endif
 
 Route104_Text_DontNeedThisTakeIt:
 	.string "This FLOWER SHOP started selling\n"

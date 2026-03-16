@@ -994,6 +994,12 @@ static void Task_BuyMenu(u8 taskId)
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
             }
+        #ifdef FEATURE_INFINITE_TMS
+            else if (GetItemPocket(itemId) == POCKET_TM_HM && CheckBagHasItem(itemId, 1))
+            {
+                BuyMenuDisplayMessage(taskId, gText_YouAlreadyHaveThis, BuyMenuReturnToItemList);
+            }
+        #endif
             else
             {
                 if (sMartInfo.martType == MART_TYPE_NORMAL)
