@@ -30,7 +30,11 @@ OldaleTown_EventScript_TownSign::
 	end
 
 OldaleTown_EventScript_Girl::
+#ifdef QOL_CHANGE_CLOCK_TIME
+	msgbox OldaleTown_Text_IfIWantToChangeWhatTime, MSGBOX_NPC
+#else
 	msgbox OldaleTown_Text_SavingMyProgress, MSGBOX_NPC
+#endif
 	end
 
 OldaleTown_EventScript_MartEmployee::
@@ -339,9 +343,16 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	walk_left
 	step_end
 
+#ifdef QOL_CHANGE_CLOCK_TIME
+OldaleTown_Text_IfIWantToChangeWhatTime:
+	.string "If I want to change what time it is,\n"
+	.string "I can walk up to a clock and press\l"
+	.string "the SELECT button.$"
+#else
 OldaleTown_Text_SavingMyProgress:
 	.string "I want to take a rest, so I'm saving my\n"
 	.string "progress.$"
+#endif
 
 OldaleTown_Text_IWorkAtPokemonMart:
 	.string "Hi!\n"
