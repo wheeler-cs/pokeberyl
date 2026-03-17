@@ -300,16 +300,29 @@ Pokemon on this checklist are those that cannot be found in the base Emerald gam
 
 ## Generation 3
 
-[ ] Surskit
+[ ] Mudkip
 
-[ ] Masquerain
+[ ] Treecko
 
-[ ] Meditite
+[ ] Torchic
 
-[ ] Medicham
+[X] Surskit
+- Route 120
 
-[ ] Roselia
+[X] Masquerain
+- Evolve Surskit
 
-[ ] Zangoose
+[X] Meditite
+- Granite Cave
 
-[ ] Lunatone
+[X] Medicham
+- Victory Road
+
+[X] Roselia
+- Route 117
+
+[X] Zangoose
+- Route 114
+
+[X] Lunatone
+- Meteor Falls

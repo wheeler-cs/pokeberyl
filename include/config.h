@@ -75,7 +75,7 @@
 #define QOL_NO_EXTRA_SAVE_CONFIRM       //< Remove extra confirmation for saving game
 #define QOL_DISABLE_UNION_ROOM_CHECK    //< Disable Nurse Joy checking the union room
 #define QOL_EASY_FISHING                //< Fishing never fails and always hooks a Pokemon
-#define QOL_RENAME_TRADED_POKEMON       //< Able to rename all Pokemon, even if received in trade
+#define QOL_RENAME_TRADED_POKEMON       //< Allows for renaming traded Pokemon
 #define QOL_FAST_RUN                    //< Pressing "B" in battle moves cursor to "RUN"
 #define QOL_RUN_INDOORS                 //< Allows for running indoors
 #define QOL_CHANGE_CLOCK_TIME           //< Change the current time by pressing SELECT when viewing the clock
