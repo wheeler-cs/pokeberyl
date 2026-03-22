@@ -75,6 +75,9 @@ ItemUseFunc GetItemFieldFunc(u16 itemId);
 u8 GetItemBattleUsage(u16 itemId);
 ItemUseFunc GetItemBattleFunc(u16 itemId);
 u8 GetItemSecondaryId(u16 itemId);
+#ifdef QOL_REUSE_REPEL_PROMPT
+void ItemId_GetHoldEffectParam_Script();
+#endif
 
 /* Expands to:
  * enum

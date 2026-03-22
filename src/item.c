@@ -942,3 +942,10 @@ u8 GetItemSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
 }
+
+#ifdef QOL_REUSE_REPEL_PROMPT
+void ItemId_GetHoldEffectParam_Script()
+{
+    VarSet(VAR_RESULT, GetItemHoldEffectParam(VarGet(VAR_0x8004)));
+}
+#endif

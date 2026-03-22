@@ -865,6 +865,9 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(gSpecialVar_ItemId));
+    #ifdef QOL_REUSE_REPEL_PROMPT
+        VarSet(VAR_REPEL_LAST_USED, gSpecialVar_ItemId);
+    #endif
         RemoveUsedItem();
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);

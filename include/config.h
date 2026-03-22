@@ -79,6 +79,7 @@
 #define QOL_FAST_RUN                    //< Pressing "B" in battle moves cursor to "RUN"
 #define QOL_RUN_INDOORS                 //< Allows for running indoors
 #define QOL_CHANGE_CLOCK_TIME           //< Change the current time by pressing SELECT when viewing the clock
+#define QOL_REUSE_REPEL_PROMPT          //< Prompt player if they want to reuse repel once it runs out
 
 #define FEATURE_PHYS_SPEC_SPLIT         //< Enable the physical-special split from gen 4
 #define FEATURE_INFINITE_TMS            //< TMs are no longer consumed on use
