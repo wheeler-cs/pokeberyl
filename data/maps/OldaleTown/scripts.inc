@@ -94,6 +94,14 @@ OldaleTown_EventScript_BagIsFull::
 	release
 	end
 
+OldaleTown_EventScript_DebugWarp::
+#ifdef BERYL_DEBUG
+	warp MAP_DEBUG_ENTRANCE, 10, 10
+	waitstate
+#endif
+	releaseall
+	end
+
 OldaleTown_Movement_EmployeeEast:
 	walk_up
 	walk_up

@@ -55,6 +55,9 @@
 #endif
 #endif
 
+// Debug flag for Beryl ROM hack
+#define BERYL_DEBUG
+
 /**
  * Code below this point is code that is introduced by the Pokemon Beryl ROM hack. Features can be
  * disabled by commenting out the define. This will remove all the code related to that feature

@@ -1059,3 +1059,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/Route103B/scripts.inc"
+
+	.include "data/maps/Debug_Entrance/scripts.inc"

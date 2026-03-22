@@ -4420,6 +4420,16 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route103B/border.bin",
       "blockdata_filepath": "data/layouts/Route103B/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEBUG_ENTRANCE",
+      "name": "Debug_Entrance_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Debug_Entrance/border.bin",
+      "blockdata_filepath": "data/layouts/Debug_Entrance/map.bin"
     }
   ]
 }

@@ -3851,6 +3851,9 @@ extern const u32 gItemIconPalette_MagmaEmblem[];
 extern const u32 gItemIcon_OldSeaMap[];
 extern const u32 gItemIconPalette_OldSeaMap[];
 
+// Beryl-only key items
+extern const u32 gItemIconPalette_Emerald[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 

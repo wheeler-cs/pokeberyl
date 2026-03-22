@@ -1549,3 +1549,9 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+// Beryl-specific key items
+static const u8 sEmeraldDesc[] = _(
+    "A dazzling green\n"
+    "gem that symbolizes\n"
+    "bravery.");
