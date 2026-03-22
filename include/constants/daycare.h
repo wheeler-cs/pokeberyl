@@ -14,7 +14,11 @@
 #define DAYCARE_TWO_MONS    3
 
 #define INHERITED_IV_COUNT 3
+#ifndef FEATURE_LEVEL_1_EGGS
 #define EGG_HATCH_LEVEL 5
+#else
+#define EGG_HATCH_LEVEL 1
+#endif
 #define EGG_GENDER_MALE 0x8000  // used to create a male egg from a female-only parent species (e.g. Nidoran)
 
 #define DAYCARE_LEVEL_MENU_EXIT 5

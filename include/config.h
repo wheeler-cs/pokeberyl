@@ -83,6 +83,7 @@
 
 #define FEATURE_PHYS_SPEC_SPLIT         //< Enable the physical-special split from gen 4
 #define FEATURE_INFINITE_TMS            //< TMs are no longer consumed on use
+#define FEATURE_LEVEL_1_EGGS            //< Eggs hatch at level 1 instead of level 5
 
 // Choose only one of the VSYNC_ options
 #define VSYNC_COMPATIBILITY             //< Optimize Vsync while maintaining linking compatibility
