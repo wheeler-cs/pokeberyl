@@ -17,3 +17,13 @@ Debug_Entrance_Pokemart_ItemStore:
 	.2byte ITEM_SAPPHIRE
 	.2byte ITEM_EMERALD
 	pokemartlistend
+
+Debug_Entrance_GiveSurf::
+	lock
+	faceplayer
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
+	setflag FLAG_BADGE05_GET
+	giveitem ITEM_HM_SURF
+	release
+	end

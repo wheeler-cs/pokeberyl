@@ -40,6 +40,7 @@ enum {
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
+    WILD_AREA_LAND_ALT,
 };
 
 #define WILD_CHECK_REPEL    (1 << 0)
@@ -207,6 +208,37 @@ static u8 ChooseWildMonIndex_Land(void)
         return 10;
     else
         return 11;
+}
+
+// LAND_ALT_WILD_COUNT
+static u8 ChooseWildMonIndex_LandAlt(void)
+{
+    u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_ALT_TOTAL;
+
+    if (rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_0)
+        return 0;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_1)
+        return 1;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_2)
+        return 2;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_3)
+        return 3;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_4)
+        return 4;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_5)
+        return 5;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_6)
+        return 6;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_7)
+        return 7;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_8)
+        return 8;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_9)
+        return 9;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_MONS_ALT_SLOT_10)
+        return 10;
+    else
+        return 11;  
 }
 
 // ROCK_WILD_COUNT / WATER_WILD_COUNT
@@ -434,6 +466,14 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 
         wildMonIndex = ChooseWildMonIndex_Land();
         break;
+    case WILD_AREA_LAND_ALT:
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, LAND_ALT_WILD_COUNT))
+            break;
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, LAND_ALT_WILD_COUNT))
+            break;
+
+        wildMonIndex = ChooseWildMonIndex_LandAlt();
+        break; 
     case WILD_AREA_WATER:
         if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, WATER_WILD_COUNT))
             break;
@@ -618,11 +658,23 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
                     return TRUE;
                 }
 
-                // try a regular wild land encounter
-                if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                if(MetatileBehavior_IsTallGrass(curMetatileBehavior)
+                || MetatileBehavior_IsLongGrass(curMetatileBehavior))
                 {
-                    BattleSetup_StartWildBattle();
-                    return TRUE;
+                    // try a regular wild land encounter
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                    {
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
+                }
+                else if(MetatileBehavior_IsTallGrassAlt(curMetatileBehavior))
+                {
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsAltInfo, WILD_AREA_LAND_ALT, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                    {
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
                 }
 
                 return FALSE;
@@ -740,10 +792,28 @@ bool8 SweetScentWildEncounter(void)
             if (DoMassOutbreakEncounterTest() == TRUE)
                 SetUpMassOutbreakEncounter(0);
             else
-                TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
-
-            BattleSetup_StartWildBattle();
-            return TRUE;
+            {
+                // Try a regular battle table encounter
+                if(MetatileBehavior_IsTallGrass(MapGridGetMetatileBehaviorAt(x, y)) ||
+                   MetatileBehavior_IsLongGrass(MapGridGetMetatileBehaviorAt(x, y)))
+                {
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                    {
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
+                }
+                // Use the alt encounter table
+                else if(MetatileBehavior_IsTallGrassAlt(MapGridGetMetatileBehaviorAt(x, y)))
+                {
+                    if(TryGenerateWildMon(gWildMonHeaders[headerId].landMonsAltInfo, WILD_AREA_LAND_ALT, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE))
+                    {
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
+                }
+            }
+            return FALSE;
         }
         else if (MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
         {
