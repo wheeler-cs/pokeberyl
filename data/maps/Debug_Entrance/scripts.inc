@@ -27,3 +27,12 @@ Debug_Entrance_GiveSurf::
 	giveitem ITEM_HM_SURF
 	release
 	end
+
+Debug_Entrance_GiveFishRods::
+	lock
+	faceplayer
+	giveitem ITEM_OLD_ROD
+	giveitem ITEM_GOOD_ROD
+	giveitem ITEM_SUPER_ROD
+	release
+	end
