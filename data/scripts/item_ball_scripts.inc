@@ -10,6 +10,10 @@ Route103_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end
 
+Route103_EventScript_ItemScopeLens::
+	finditem ITEM_SCOPE_LENS
+	end
+
 Route104_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end

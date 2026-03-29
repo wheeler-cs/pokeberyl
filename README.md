@@ -4,7 +4,7 @@ A ROM hack of Pokémon Emerald using the [**Pokemon Emerald Decompilation Projec
 
 Currently, the project builds the following ROM:
 
-**pokeberyl.gba** `sha1sum: a4733c79431d9e695ad57e207ee49ca3f3974c75`
+**pokeberyl.gba** `sha1sum: 8141b62d91ef2bb9cd58abbe73042d4354957190`
 
 # Installation
 Installation instructions can be found in [INSTALL.md](./INSTALL.md).
