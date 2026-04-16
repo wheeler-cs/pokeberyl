@@ -431,7 +431,10 @@
     "TerraCave_Entrance",
     "TerraCave_End",
     "AlteringCave",
-    "MeteorFalls_StevensCave"
+    "MeteorFalls_StevensCave",
+    "MeteorFalls_JirachiDungeon_1F",
+    "MeteorFalls_JirachiDungeon_1B",
+    "MeteorFalls_JirachiDungeon_2B"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

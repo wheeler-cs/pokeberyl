@@ -5,6 +5,7 @@ Route115_MapScripts::
 	.byte 0
 
 Route115_OnLoad:
+	call_if_unset FLAG_JIRACHI_DOOR_OPENED, Route115_EventScript_CloseSecretEntrance
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_WEST, AbnormalWeather_EventScript_PlaceTilesRoute115West
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_115_EAST, AbnormalWeather_EventScript_PlaceTilesRoute115East
 	end
@@ -18,6 +19,11 @@ Route115_OnTransition:
 Route115_OnFrame:
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
+
+Route115_EventScript_CloseSecretEntrance::
+	setmetatile 9, 3, METATILE_Fallarbor_BrownRockWall, TRUE
+	setmetatile 9, 4, METATILE_Fallarbor_BrownRockWall, TRUE
+	return
 
 Route115_EventScript_Woman::
 	msgbox Route115_Text_NeverKnowWhenCavePokemonWillAppear, MSGBOX_NPC

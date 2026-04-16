@@ -1061,3 +1061,9 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/Route103B/scripts.inc"
 
 	.include "data/maps/Debug_Entrance/scripts.inc"
+
+	.include "data/maps/MeteorFalls_JirachiDungeon_1F/scripts.inc"
+
+	.include "data/maps/MeteorFalls_JirachiDungeon_1B/scripts.inc"
+
+	.include "data/maps/MeteorFalls_JirachiDungeon_2B/scripts.inc"

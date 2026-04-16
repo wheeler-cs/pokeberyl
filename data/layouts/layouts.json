@@ -4430,6 +4430,36 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Debug_Entrance/border.bin",
       "blockdata_filepath": "data/layouts/Debug_Entrance/map.bin"
+    },
+    {
+      "id": "LAYOUT_METEOR_FALLS_JIRACHI_DUNGEON_1F",
+      "name": "MeteorFalls_JirachiDungeon_1F_Layout",
+      "width": 21,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MeteorFalls",
+      "border_filepath": "data/layouts/MeteorFalls_JirachiDungeon_1F/border.bin",
+      "blockdata_filepath": "data/layouts/MeteorFalls_JirachiDungeon_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_METEOR_FALLS_JIRACHI_DUNGEON_1B",
+      "name": "MeteorFalls_JirachiDungeon_1B_Layout",
+      "width": 26,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MeteorFalls",
+      "border_filepath": "data/layouts/MeteorFalls_JirachiDungeon_1B/border.bin",
+      "blockdata_filepath": "data/layouts/MeteorFalls_JirachiDungeon_1B/map.bin"
+    },
+    {
+      "id": "LAYOUT_METEOR_FALLS_JIRACHI_DUNGEON_2B",
+      "name": "MeteorFalls_JirachiDungeon_2B_Layout",
+      "width": 26,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MeteorFalls",
+      "border_filepath": "data/layouts/MeteorFalls_JirachiDungeon_2B/border.bin",
+      "blockdata_filepath": "data/layouts/MeteorFalls_JirachiDungeon_2B/map.bin"
     }
   ]
 }
