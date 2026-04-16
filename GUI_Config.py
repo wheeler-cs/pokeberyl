@@ -1,62 +1,89 @@
 #!/bin/python3
 
-import tkinter
+try:
+    import tkinter as tk
+except:
+    print("Please install the python3-tk")
+    exit(1)
+from typing import List
 
-from typing import Dict, List
+
+# === Configuration file handling ===
 
 CONFIG_BEGIN_STR = "// GUI_CONFIG BEGIN"
 CONFIG_END_STR = "// GUI_CONFIG END"
 CONFIG_SECTION_STR = "// GUI_CONFIG SECTION "
 
-# === Configuration file handling ===
-
-
 class Flag():
-    '''
+    ''' Single instance of a feature flag in the project.
 
+    Attributes:
+        _flag(str): Name of flag inside code.
+        _comment(str): Descriptor comment for what flag enables.
+        _enabled(bool): Indicator for if flag is enabled or disabled.
     '''
 
     def __init__(self, flag: str, comment: str, enabled: bool) -> None:
-        '''
+        ''' Initialize for Flag class.
 
+        Args:
+            flag(str): Name of flag inside code.
+            comment(str): Descriptor comment for what flag enables.
+            enabled(bool): Indicator for if flag is enabled or disabled.
         '''
         self._flag = flag
         self._comment = comment
         self._enabled = enabled
 
     def __str__(self) -> str:
+        ''' String overload for Flag class.
+        
+        Returns:
+            Formatted string with all data associated with Flag instance.
+        '''
         return (f"({self._enabled}) {self._flag}: {self._comment}")
 
 
 class ConfigSection():
+    ''' Block of related flags within the code.
+
+    Attributes:
+        _section_name(str): Text name for section.
+        _section_flags(List[Flag]): List of Flags associated with section.
     '''
 
-    '''
+    def __init__(self, section_name: str) -> None:
+        ''' Initializer for ConfigSection class.
 
-    def __init__(self, section_name: str):
-        '''
-
+        Args:
+            section_name(str): Name of section.
         '''
         self._section_name: str = section_name
         self._section_flags: List[Flag] = []
 
 
 class Config():
-    '''
+    ''' Config class containing configuration data.
 
+    Attributes:
+        _config_info(List[ConfigSection]): List of sections inside the configuration file.
     '''
 
     def __init__(self, file_name: str | None = None) -> None:
-        '''
+        ''' Initializer for Config class.
 
+        Args:
+            file_name(str | None): Path to configuration file.
         '''
         self._config_info: List[ConfigSection] = []
         if (file_name is not None):
             self.load_config(file_name)
 
     def load_config(self, file_name: str) -> None:
-        '''
+        ''' Load and parse configuration data and organize into data structures.
 
+        Args:
+            file_name(str): Path to target configuration file to parse.
         '''
         # Function variables
         config_text_list = []
@@ -92,12 +119,57 @@ class Config():
                     split_text = config_text_list[i].split("//<")
                     comment = split_text[1][1:]
                     flag = split_text[0][len("#define "):].replace(' ', '')
+                    # Add new flag
                     self._config_info[-1]._section_flags.append(
                         Flag(flag, comment, enabled))
-        for i in self._config_info:
-            for j in i._section_flags:
-                print(j)
 
+
+# === GUI handling code ===
+
+def gui_main(config: Config) -> None:
+    '''
+    
+    '''
+    window = init_window()
+    populate_sections(window, config)
+    window.mainloop()
+
+
+def init_window() -> tk.Tk:
+    '''
+    
+    '''
+    window = tk.Tk()
+    window.title("pokeberyl Configuration")
+    window.geometry("1080x720")
+    return window
+
+
+def populate_sections(window: tk.Tk, config: Config) -> None:
+    '''
+    
+    '''
+    # Populate information
+    for i, info in enumerate(config._config_info):
+        # Add label to top of column
+        tk.Label(window,
+                 text=info._section_name,
+                 relief="raised",
+                 width=30,
+                 anchor="w",
+                 justify="left").grid(row=0,
+                                      column=i)
+        # Add entries to subsequent rows
+        for j, flag in enumerate(info._section_flags):
+            tk.Label(window,
+                     text=flag._flag,
+                     width=30,
+                     anchor="w",
+                     justify="left").grid(row=j + 1,
+                                          column=i)
+
+# === Main ===
 
 if __name__ == "__main__":
     config = Config("./include/config.h")
+    gui_main(config)
