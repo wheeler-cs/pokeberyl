@@ -67,13 +67,16 @@
  * VSYNC_COMPATIBILITY and VSYNC_AGGRESSIVE). Options that follow this style are indicated as such
  * with comments.
  */
-
 // Comment out defines to disable features
+
+// GUI_CONFIG BEGIN
+// GUI_CONFIG SECTION FIXES
 #define FIX_WEATHER_SNOW                //< Fix overworld snow weather
 #define FIX_REDUNDANT_POPUP             //< Remove map popups if walking between same map area
 #define FIX_REDUNDANT_COLOR_MAP         //< Remove expensive calls for rebuilding color maps
 #define FIX_TMS_RESTORE_PP              //< TMs no longer restore PP when used
 
+// GUI_CONFIG SECTION QOL
 #define QOL_BETTER_DEFAULT_OPTIONS      //< Set better default options for new saves
 #define QOL_NO_EXTRA_SAVE_CONFIRM       //< Remove extra confirmation for saving game
 #define QOL_DISABLE_UNION_ROOM_CHECK    //< Disable Nurse Joy checking the union room
@@ -84,12 +87,15 @@
 #define QOL_CHANGE_CLOCK_TIME           //< Change the current time by pressing SELECT when viewing the clock
 #define QOL_REUSE_REPEL_PROMPT          //< Prompt player if they want to reuse repel once it runs out
 
+// GUI_CONFIG SECTION FEATURES
 #define FEATURE_PHYS_SPEC_SPLIT         //< Enable the physical-special split from gen 4
 #define FEATURE_INFINITE_TMS            //< TMs are no longer consumed on use
 #define FEATURE_LEVEL_1_EGGS            //< Eggs hatch at level 1 instead of level 5
 
+// GUI_CONFIG SECTION MISC
 // Choose only one of the VSYNC_ options
 #define VSYNC_COMPATIBILITY             //< Optimize Vsync while maintaining linking compatibility
 //#define VSYNC_AGGRESSIVE              //< Optimize Vsync aggressively, breaking vanilla compatibility
+// GUI_CONFIG END
 
 #endif // GUARD_CONFIG_H
